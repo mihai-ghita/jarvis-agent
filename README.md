@@ -1,6 +1,6 @@
 # Jarvis Agent
 
-An interactive Python CLI for having a conversation with Claude.
+An interactive Python TUI for having a conversation with Claude.
 
 ## Setup
 
@@ -26,12 +26,20 @@ An interactive Python CLI for having a conversation with Claude.
 
 ## Usage
 
-Start an interactive conversation:
+Start the chat TUI:
 
 ```bash
 python jarvis.py
 ```
 
-Type your messages at the `You:` prompt. Claude's replies are printed with full conversation context preserved across turns.
+The app opens a scrollable chat view with an input bar at the bottom. Type your message and press Enter to send. Claude's replies stream in token-by-token and are rendered as Markdown. Conversation context is preserved across turns.
 
-To end the session, type `exit` or `quit`, or press Ctrl-D / Ctrl-C.
+### Controls
+
+- **Enter** — send your message
+- **Scroll** — use the mouse wheel or keyboard to browse chat history
+- **`exit` or `quit`** — end the session
+- **Ctrl+Q** — quit the app
+- **Ctrl+C** — quit the app
+
+If `ANTHROPIC_API_KEY` is missing, the app still opens and shows an error in the chat log instead of starting a conversation.
