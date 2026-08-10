@@ -51,6 +51,7 @@ def main() -> None:
             messages.pop()
             continue
 
+        print(response.content)
         reply = response.content[0].text
         print(f"Claude: {reply}\n")
         messages.append({"role": "assistant", "content": reply})
