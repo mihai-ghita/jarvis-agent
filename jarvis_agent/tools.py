@@ -9,10 +9,12 @@ from __future__ import annotations
 
 from pathlib import Path
 
+from anthropic.types import ToolParam
+
 from jarvis_agent.sandbox import Sandbox, SandboxError
 from jarvis_agent.skills import Skill, SkillNotFoundError, load_skill
 
-TOOL_DEFINITIONS: list[dict] = [
+TOOL_DEFINITIONS: list[ToolParam] = [
     {
         "name": "read_file",
         "description": (

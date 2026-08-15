@@ -26,7 +26,7 @@ def _format_input(tool_input: dict[str, Any]) -> str:
         return "  (no arguments)"
     lines = []
     for key, value in tool_input.items():
-        lines.append(f"  {key}: {_truncate(str(value))}")
+        lines.append(f"  {key}: {str(value)}")
     return "\n".join(lines)
 
 

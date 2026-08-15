@@ -10,6 +10,7 @@ from __future__ import annotations
 from typing import Callable
 
 import anthropic
+from anthropic.types import MessageParam
 
 from jarvis_agent.tools import ToolError, ToolExecutor, TOOL_DEFINITIONS
 
@@ -36,7 +37,7 @@ class AgentSession:
         self.system_prompt = system_prompt
         self.max_steps = max_steps
         self.on_tool_call = on_tool_call
-        self.history: list[dict] = []
+        self.history: list[MessageParam] = []
 
     def send(self, user_text: str) -> str:
         """Append a user turn, run the tool-use loop, and return the final reply.
