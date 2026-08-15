@@ -1,6 +1,6 @@
 # Jarvis Agent
 
-An interactive Python TUI for having a conversation with Claude.
+An interactive command-line chat with Claude.
 
 ## Setup
 
@@ -26,20 +26,32 @@ An interactive Python TUI for having a conversation with Claude.
 
 ## Usage
 
-Start the chat TUI:
+Start the chat:
 
 ```bash
-python jarvis.py
+python -m jarvis_simple_chat
 ```
 
-The app opens a scrollable chat view with an input bar at the bottom. Type your message and press Enter to send. Claude's replies stream in token-by-token and are rendered as Markdown. Conversation context is preserved across turns.
+Or, equivalently, using the root-level script:
+
+```bash
+python jarvis-simple-chat.py
+```
+
+Type your message at the `You:` prompt and press Enter to send. Claude's reply is printed after a `Claude:` prefix. Conversation context is preserved across turns.
 
 ### Controls
 
 - **Enter** — send your message
-- **Scroll** — use the mouse wheel or keyboard to browse chat history
 - **`exit` or `quit`** — end the session
-- **Ctrl+Q** — quit the app
-- **Ctrl+C** — quit the app
+- **Ctrl+C** — end the session
 
-If `ANTHROPIC_API_KEY` is missing, the app still opens and shows an error in the chat log instead of starting a conversation.
+If `ANTHROPIC_API_KEY` is missing, the program prints an error and exits immediately.
+
+## Tests
+
+Run the unit tests with:
+
+```bash
+python -m unittest discover -s tests
+```
