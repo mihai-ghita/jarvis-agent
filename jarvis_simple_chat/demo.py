@@ -6,7 +6,7 @@ what actually gets sent to and stored by the Claude API on each turn.
 
 from __future__ import annotations
 
-from typing import Any
+from typing import Any, Mapping, Sequence
 
 _ROLE_WIDTH = 11
 _CONTENT_TRUNCATE_LEN = 60
@@ -36,7 +36,10 @@ def _truncate(text: str, limit: int = _CONTENT_TRUNCATE_LEN) -> str:
     return text
 
 
-def _format_line(idx: int, role: str, content: Any, marker: str | None = None) -> str:
+def _format_line(idx: int,
+                 role: str,
+                 content: Any,
+                 marker: str | None = None) -> str:
     text = _truncate(_content_text(content))
     role_field = role.ljust(_ROLE_WIDTH)
     if marker:
@@ -45,13 +48,17 @@ def _format_line(idx: int, role: str, content: Any, marker: str | None = None) -
     return f"  [{idx}] {role_field}{text}"
 
 
-def _estimate_tokens(messages: list[dict[str, Any]]) -> int:
+def _estimate_tokens(messages: Sequence[Mapping[str, Any]]) -> int:
     """Rough `chars / 4` approximation — good enough to show cost growth."""
-    total_chars = sum(len(_content_text(msg.get("content", ""))) for msg in messages)
+    total_chars = sum(
+        len(_content_text(msg.get("content", ""))) for msg in messages
+    )
     return total_chars // 4
 
 
-def format_api_call(model: str, max_tokens: int, messages: list[dict[str, Any]]) -> str:
+def format_api_call(
+    model: str, max_tokens: int, messages: Sequence[Mapping[str, Any]]
+) -> str:
     """Render the outgoing `messages.create` request: model, size, full history."""
     lines = [
         "-- Claude API call --------------------------------",
@@ -68,7 +75,7 @@ def format_api_call(model: str, max_tokens: int, messages: list[dict[str, Any]])
     return "\n".join(lines)
 
 
-def format_context(history: list[dict[str, Any]]) -> str:
+def format_context(history: Sequence[Mapping[str, Any]]) -> str:
     """Render the stored history after a turn — what the next call will resend."""
     token_estimate = _estimate_tokens(history)
     lines = [
