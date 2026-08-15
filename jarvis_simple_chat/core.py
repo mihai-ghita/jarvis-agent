@@ -17,8 +17,8 @@ class ChatSession:
         max_tokens: int,
     ) -> None:
         self._client = client
-        self._model = model
-        self._max_tokens = max_tokens
+        self.model = model
+        self.max_tokens = max_tokens
         self.history: list[anthropic.types.MessageParam] = []
 
     def send(self, user_text: str) -> str:
@@ -31,8 +31,8 @@ class ChatSession:
 
         try:
             response = self._client.messages.create(
-                model=self._model,
-                max_tokens=self._max_tokens,
+                model=self.model,
+                max_tokens=self.max_tokens,
                 messages=self.history,
             )
         except anthropic.APIError:

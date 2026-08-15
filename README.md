@@ -48,6 +48,21 @@ Type your message at the `You:` prompt and press Enter to send. Claude's reply i
 
 If `ANTHROPIC_API_KEY` is missing, the program prints an error and exits immediately.
 
+### Demo mode
+
+For presentations or teaching how a chat with an LLM actually works, run with `--demo`:
+
+```bash
+python -m jarvis_simple_chat --demo
+```
+
+After every reply, this prints two extra panels:
+
+- **Claude API call** — the exact request about to be sent, including the full conversation history resent on every turn (the API itself is stateless).
+- **Context after this turn** — the updated history, with the just-appended message flagged, plus a rough token estimate (`chars / 4`).
+
+This makes it visible that "memory" in a chat is just the client resending the whole conversation each time, and that the assistant's own replies become part of the context for the next call.
+
 ## Tests
 
 Run the unit tests with:
