@@ -11,6 +11,9 @@ env/
 # Environment variables / secrets
 .env
 
+# Jarvis agent runtime workspace
+jarvis_agent/workspace/
+
 # Editor
 .vscode/
 
