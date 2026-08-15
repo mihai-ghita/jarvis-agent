@@ -59,7 +59,8 @@ def _estimate_tokens(messages: Sequence[Mapping[str, Any]]) -> int:
 def format_api_call(
     model: str, max_tokens: int, messages: Sequence[Mapping[str, Any]]
 ) -> str:
-    """Render the outgoing `messages.create` request: model, size, full history."""
+    """Render the outgoing `messages.create` request: model,
+    size, full history."""
     lines = [
         "-- Claude API call --------------------------------",
         "POST /v1/messages",
@@ -76,7 +77,8 @@ def format_api_call(
 
 
 def format_context(history: Sequence[Mapping[str, Any]]) -> str:
-    """Render the stored history after a turn — what the next call will resend."""
+    """Render the stored history after a turn — what the
+    next call will resend."""
     token_estimate = _estimate_tokens(history)
     lines = [
         f"-- Context after this turn ({len(history)} messages, "
